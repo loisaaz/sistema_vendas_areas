@@ -1,11 +1,10 @@
-# voos = {'01': cid}
-# vooNumero = [cidadeOrigem, cidadeDestino, escala, preco, capacidadeDoAviao]
-# voos = {"01": { "origem": "São Paulo", "destino": "Rio de Janeiro",  "escalas": 1,    "preco": 300.0,    "lugares_disponiveis": 5, "passageiros": [] }
 
+# dicionarios e listas que serão usados ao decorrer do programa
 voos = {}
 
 
 # part 1
+
 option = 0
 
 while option != 7:
@@ -31,16 +30,14 @@ while option != 7:
         print('\n\tOpção cadastrar Voo escolhida...')
         print('\n------------------------------------------------------------------')
 
-        #cad = "S"
-        #while cad == "S":
         codigo =  input("\n\tDigite o código do Voo: ")
 
         if codigo in voos:
             print('\n\tHá um voo cadastrado com esse código!')
             codigo =  input("\n\tDigite o código do Voo: ")
         else:
-            origem = input("\n\tDigite a cidade de origem: ").upper()
-            destino = input("\n\tDigite a cidade de destino: ").upper()
+            origem = input("\n\tDigite a cidade de origem: ").strip().upper()
+            destino = input("\n\tDigite a cidade de destino: ").strip().upper()
             escala = int(input("\n\tQuantas escalas têm o voo: "))
             preco = float(input("\n\tPreço da passagem: "))
             capacidade = int(input("\n\tQuantidade de lugares disponíveis: "))
@@ -68,10 +65,40 @@ while option != 7:
         while d not in [1, 2, 3]:
             print("\n\tOpção inválida !")
             d = int(input('\n\tDigite uma opção: '))
+
         if d == 1:
             c = int(input('\n\tInforme o código: '))
             for c in voos:
                 print(f"\n\tVoo {codigo} Informações: {voos[codigo]}")
+
+        elif d == 2:
+        # Cidade Origem:  imprimir o Código do Voo, cidade  Destino, preço de todos os voos 
+            d = input('\n\tDigite a cidade origem: ').strip().upper()
+            for d in voos:
+                voos[codigo] = {
+                    "Código": codigo,
+                    "Destino": destino,
+                    #"Escalas": escala,
+                    "Preço": preco
+                }
+            print(f'\n\t{voos[codigo]}')
+
+        elif d == 3:
+        # Cidade Destino: imprimir o Código do Voo, cidade  Origem, preço de todos os voos
+            d = input('\n\tDigite a cidade destino: ').strip().upper()
+            for d in voos:
+                voos[codigo] = {
+                    "Código": codigo,
+                    "Origem": origem,
+                    "Preço": preco
+                }
+            print(f'\n\t{voos[codigo]}')
+
+    elif option == 4:
+        print()
+
+
+
 
     elif option == 7:
         print('\n\tSaindo do sistema...')
