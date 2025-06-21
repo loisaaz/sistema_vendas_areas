@@ -30,11 +30,11 @@ while option != 7:
         print('\n\tOpção cadastrar Voo escolhida...')
         print('\n------------------------------------------------------------------')
 
-        codigo =  input("\n\tDigite o código do Voo: ")
+        codigo =  int(input("\n\tDigite o código do Voo: "))
 
         if codigo in voos:
             print('\n\tHá um voo cadastrado com esse código!')
-            codigo =  input("\n\tDigite o código do Voo: ")
+            codigo =  int(input("\n\tDigite o código do Voo: "))
         else:
             origem = input("\n\tDigite a cidade de origem: ").strip().upper()
             destino = input("\n\tDigite a cidade de destino: ").strip().upper()
@@ -68,36 +68,69 @@ while option != 7:
 
         if d == 1:
             c = int(input('\n\tInforme o código: '))
-            for c in voos:
-                print(f"\n\tVoo {codigo} Informações: {voos[codigo]}")
+            for codigo, dados in voos:
+                if dados[codigo] == c:
+                    print(f"\n\tVoo {codigo} Informações: {voos[codigo]}")
+                else:
+                    print('\n\tNenhum voo encontrado')
 
         elif d == 2:
         # Cidade Origem:  imprimir o Código do Voo, cidade  Destino, preço de todos os voos 
-            d = input('\n\tDigite a cidade origem: ').strip().upper()
-            for d in voos:
-                voos[codigo] = {
-                    "Código": codigo,
-                    "Destino": destino,
-                    #"Escalas": escala,
-                    "Preço": preco
-                }
-            print(f'\n\t{voos[codigo]}')
+            d_o = input('\n\tDigite a cidade origem: ').strip().upper()
+            for codigo, dados in voos.items():
+                if dados["Origem"] == d_o:
+                    print(f'\n\tCódigo: {codigo} Destino: {dados["Destino"]} Preço: R${dados["Preço"]:.2f}')
+                    #print(f'\n\t{voos[codigo]}')
+                else:
+                    print('\n\tNenhum voo encontrado')
 
         elif d == 3:
         # Cidade Destino: imprimir o Código do Voo, cidade  Origem, preço de todos os voos
-            d = input('\n\tDigite a cidade destino: ').strip().upper()
-            for d in voos:
-                voos[codigo] = {
-                    "Código": codigo,
-                    "Origem": origem,
-                    "Preço": preco
-                }
-            print(f'\n\t{voos[codigo]}')
+            d_d = input('\n\tDigite a cidade destino: ').strip().upper()
+            for codigo, dados in voos.items():
+                if dados["Destino"] == d_d:
+                    print(f'\n\tCódigo: {codigo} Origem: {dados["Origem"]} Preço: R${dados["Preço"]:.2f}')
+                    #print(f'\n\t{voos[codigo]}')
+                else:
+                    print('\n\tNenhum voo encontrado')
 
-    elif option == 4:
+    elif option == 3:
+        #  Informar o Voo com menor Escala, dado a cidade Origem e Destino
         print()
+        print('\n------------------------------------------------------------------')
+        print('\n\tOpção consultar Voo com menor escala escolhida...')
+        print('\n------------------------------------------------------------------')
+        origem = input("\n\tDigite a cidade de origem: ").strip().upper()
+        destino = input("\n\tDigite a cidade de destino: ").strip().upper()
+        
+        menor_escala = 999
+        voo_menor_escala = '-' 
+        
+        for codigo, dados in voos.items():
+            if dados["Origem"] == origem and dados["Destino"] == destino:
+                if dados["Escalas"] < menor_escala:
+                    menor_escala = dados["Escalas"]
+                    voo_menor_escala = codigo
+        if voo_menor_escala:
+            print(f'\n\tVoo com menor escala: ["Código":{voo_menor_escala}] ["Escala": {menor_escala}]')
+        else:
+            print("\n\tNenhum voo encontrado para essa origem e destino.")
+    elif option == 4:
+        print('\n------------------------------------------------------------------')
+        print('\n\tOpção passageiros de um Voo escolhida...')
+        print('\n------------------------------------------------------------------')
+        c_c = int(input('\n\tInforme o código do Voo: '))
+        # nao fiz parte de compra
 
+    elif option == 5:
+        print('\n------------------------------------------------------------------')
+        print('\n\tOpção venda de passagem escolhida...')
+        print('\n------------------------------------------------------------------')
+        print()
+        # qual voo
+        #  As informações da lista de passageiro e da capacidade disponível devem ser atualizadas.
 
+    # 
 
 
     elif option == 7:
