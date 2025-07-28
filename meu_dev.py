@@ -2,17 +2,13 @@
 # dicionarios e listas que serão usados ao decorrer do programa
 
 voos = {} # voos cadastrados no sistema entrarão aqui
-
+passageiros= {}
 
 # Voos: contendo o número do voo (chave), cidade origem, cidade destino, número de escalas, preço da passagem, quantidade de lugares disponíveis
 #• Passageiros: contendo informações como CPF (chave), nome, telefone. Cada cliente pode comprar mais de uma passagem
 #• Utilizar listas para armazenar:
 #• Listas de voos disponíveis, quando a quantidade de lugares disponíveis de um voo chega a zero o voo fica indisponível para venda
 #• Listas de passageiros que compraram passagens para um determinado voo
-
-
-
-
 
 # part 1
 
@@ -58,8 +54,8 @@ while option != 7:
                 "Destino": destino,
                 "Escalas": escala,
                 "Preço": preco,
-                "Lugares disponiveis": capacidade,
-                "Passageiros": []
+                "Lugares disponiveis": [capacidade],
+                "Passageiros": passageiros
             } 
             print(f'\n\tVoo "{codigo}" cadastrado com sucesso!')
             #print(f"\tInformações: {codigo}:{voos[codigo]}")
@@ -92,8 +88,8 @@ while option != 7:
                 if dados["Origem"] == d_o:
                     print(f'\n\tCódigo: {codigo} Destino: {dados["Destino"]} Preço: R${dados["Preço"]:.2f}')
                     #print(f'\n\t{voos[codigo]}')
-                else:
-                    print('\n\tNenhum voo encontrado')
+            else:
+                print('\n\tNenhum voo encontrado')
 
         elif d == 3:
         # Cidade Destino: imprimir o Código do Voo, cidade  Origem, preço de todos os voos
@@ -131,6 +127,7 @@ while option != 7:
         print('\n\tOpção passageiros de um Voo escolhida...')
         print('\n------------------------------------------------------------------')
         c_c = int(input('\n\tInforme o código do Voo: '))
+        
         # nao fiz parte de compra
 
     elif option == 5:
@@ -141,8 +138,23 @@ while option != 7:
         cod_voo = int(input('\n\tInforme o código do Voo: '))
         for codigo in voos.keys():
             if codigo == cod_voo:
-                print(f"\n\tVoo {codigo} Informações: {voos[codigo]}")
-                cod_voo = int(input('\n\tInforme o código do Voo: '))
+                passagem = int(input('\n\tQuantidade de passagens: '))
+                if passagem <= capacidade:
+                    nome = input('\n\tInforme o nome do comprador: ').strip().upper()
+                    cpf = input('\n\tInforme o CPF do comprador: ').strip()
+                    telefone = input('\n\tInforme o telefone do comprador: ').strip()
+                    passageiros[cpf] = [nome, telefone]
+                    print('\n\tPassagens compradas!') 
+                #else:
+                    #print("Não há esse números de passagens disponíveis.")
+            else:
+                print('\n\tNenhum voo encontrado')
+                
+
+
+
+                #\nDeseja fazer outra compra de passagens?'
+                # atualizar quantidade de lugares no voo e atualizar a lista de passageiros
         else:
             print('\n\tNenhum voo encontrado')
 
