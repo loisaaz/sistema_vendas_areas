@@ -136,28 +136,34 @@ while option != 7:
         print('\n------------------------------------------------------------------')
         print()
         cod_voo = int(input('\n\tInforme o código do Voo: '))
-        for codigo in voos.keys():
-            if codigo == cod_voo:
-                passagem = int(input('\n\tQuantidade de passagens: '))
-                if passagem <= capacidade:
-                    nome = input('\n\tInforme o nome do comprador: ').strip().upper()
-                    cpf = input('\n\tInforme o CPF do comprador: ').strip()
-                    telefone = input('\n\tInforme o telefone do comprador: ').strip()
-                    passageiros[cpf] = [nome, telefone]
-                    print('\n\tPassagens compradas!') 
-                #else:
-                    #print("Não há esse números de passagens disponíveis.")
+
+        if cod_voo in voos:
+            #if codigo == cod_voo:
+            passagem = int(input('\n\tQuantidade de passagens: '))
+            if passagem > voos[codigo]['Lugares disponiveis'][0]:
+                print('\n\tNão há esse números de passagens disponíveis.')
             else:
-                print('\n\tNenhum voo encontrado')
+                 
+                nome = input('\n\tInforme o nome do comprador: ').strip().upper()
+                cpf = input('\n\tInforme o CPF do comprador: ').strip()
+                telefone = input('\n\tInforme o telefone do comprador: ').strip()
                 
+                passageiros[cpf] = [passagem, nome, telefone]
+                voos[cod_voo]['Lugares disponiveis'][0] -= passagem
+                #print(passageiros)
+                print('\n\tPassagens compradas!') 
+                print('\n\tCapacidade restante no voo:', voos[cod_voo]['Lugares disponiveis'][0])   
 
-
-
-                #\nDeseja fazer outra compra de passagens?'
-                # atualizar quantidade de lugares no voo e atualizar a lista de passageiros
-        else:
+               # comprar = input('\nDeseja fazer outra compra de passagens?').strip().upper()
+               # if comprar == 'SIM' and 'S':
+               #     cod_voo = int(input('\n\tInforme o código do Voo: '))
+               
+        else: # essa parte está aparecendo msm com o voo sendo encontrado
             print('\n\tNenhum voo encontrado')
 
+ 
+                # atualizar quantidade de lugares no voo e atualizar a lista de passageiros
+        
         # Venda de passagem : permitir que um cliente compre uma passagem para um voo disponível, 
         # solicitando suas informações. As informações da lista de passageiro e da capacidade disponível devem ser atualizadas. 
         # digite o código do voo que deseja comprar
